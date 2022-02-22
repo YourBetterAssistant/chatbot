@@ -7,6 +7,6 @@ data = data.split("\n")
 
 for text in data:
     text = text.split("=")
-    if len(text) < 1:
+    if len(text) < 2:
         break
     os.environ[text[0]] = text[1]
