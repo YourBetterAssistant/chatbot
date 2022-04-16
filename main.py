@@ -6,8 +6,9 @@ from fastapi import FastAPI
 from chatterbot import ChatBot
 from pydantic import BaseModel
 from chatterbot.trainers import ListTrainer
+from typing import List
 class TrainerBody(BaseModel):
-    toBeTrained:array[str]
+    toBeTrained:List[str]
 bot = ChatBot(
     "YourBetterAssistant",
     storage_adapter="chatterbot.storage.MongoDatabaseAdapter",
