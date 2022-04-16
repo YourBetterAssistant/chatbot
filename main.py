@@ -27,13 +27,12 @@ bot = ChatBot(
         {"import_path": "chatterbot.logic.MathematicalEvaluation"},
     ],
 )
-args = " ".join(sys.argv)
 app = FastAPI()
 trainer=ListTrainer(bot)
 @app.get("/")
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
 @app.post("/train")
-def train_Bot(toBeTrained:TrainerBody):
-    trainer.train(toBeTrained)
+def train_Bot(body:TrainerBody):
+    trainer.train(body.toBeTrained)
     return {"message":"Training"}
