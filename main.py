@@ -32,7 +32,8 @@ class Body(BaseModel):
 @app.get("/")
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
+
 @app.post("/train")
 def train_Bot(toBeTrained:Body):
     trainer.train(toBeTrained)
-    return "Training"
+    return {"message":"Training"}
