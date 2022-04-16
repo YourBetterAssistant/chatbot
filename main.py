@@ -1,3 +1,4 @@
+from array import array
 import os
 import sys
 import envReader
@@ -28,7 +29,7 @@ args = " ".join(sys.argv)
 app = FastAPI()
 trainer=ListTrainer(bot)
 class Body(BaseModel):
-    toBeTrained:"list[str]"
+    toBeTrained:array[str]
 @app.get("/")
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
