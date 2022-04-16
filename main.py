@@ -28,13 +28,13 @@ bot = ChatBot(
 args = " ".join(sys.argv)
 app = FastAPI()
 trainer=ListTrainer(bot)
-class Body(BaseModel):
+class TrainerBody(BaseModel):
     toBeTrained:array[str]
 @app.get("/")
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
 
 @app.post("/train")
-def train_Bot(toBeTrained:Body):
+def train_Bot(toBeTrained:TrainerBody):
     trainer.train(toBeTrained)
     return {"message":"Training"}
