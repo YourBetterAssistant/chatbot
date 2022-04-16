@@ -34,4 +34,4 @@ def show_Home(message: str = "Hello"):
 @app.post("/train")
 def train(toBeTrained: "list[str]"=["hello"]):
     bot.train(toBeTrained)
-    return {"message": f"{bot.get_response(toBeTrained)}"}
+    return "Training"
