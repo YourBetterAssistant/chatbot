@@ -32,6 +32,6 @@ app = FastAPI()
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
 @app.post("/train")
-def train(toBeTrained: "list[str]"):
+def train_Bot(toBeTrained: "list[str]"):
     bot.train(toBeTrained)
     return "Training"
