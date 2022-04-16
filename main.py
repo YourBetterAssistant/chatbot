@@ -3,6 +3,7 @@ import sys
 import envReader
 from fastapi import FastAPI
 from chatterbot import ChatBot
+from pydantic import BaseModel
 
 print("hello")
 bot = ChatBot(
@@ -22,13 +23,15 @@ bot = ChatBot(
             "output_text": "Of couse I do, here it is https://yourbetterassistant.me",
         },
         {"import_path": "chatterbot.logic.MathematicalEvaluation"},
-        {"import_path": "chatterbot.logic.TimeLogicAdapter"},
     ],
 )
 args = " ".join(sys.argv)
 app = FastAPI()
 
-
 @app.get("/")
 def show_Home(message: str = "Hello"):
     return {"message": f"{bot.get_response(message)}"}
+@app.post("/train")
+def train(toBeTrained: "list[str]"=["hello"]):
+    bot.train(toBeTrained)
+    return {"message": f"{bot.get_response(toBeTrained)}"}

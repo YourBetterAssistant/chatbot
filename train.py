@@ -1,10 +1,9 @@
 from os import environ
 import os
 import envReader
-import chatterbot
 from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ListTrainer
 
 bot = ChatBot(
     "YourBetterAssistant",
@@ -23,12 +22,36 @@ bot = ChatBot(
             "output_text": "Of couse I do, here it is https://yourbetterassistant.me",
         },
         {"import_path": "chatterbot.logic.MathematicalEvaluation"},
-        {"import_path": "chatterbot.logic.TimeLogicAdapter"},
     ],
 )
 trainer = ChatterBotCorpusTrainer(bot)
+trainer.train("./messages/")
+trainer.train("chatterbot.corpus.english.greetings", "chatterbot.corpus.english.trivia", "chatterbot.corpus.english.psychology", "chatterbot.corpus.english.humor")
 
-trainer.train("chatterbot.corpus.english")
+trainer=ListTrainer(bot)
+trainer.train([
+    "How are you?",
+    "I am good.",
+    "That is good to hear.",
+    "Thank you.",
+    "You are welcome."
+])
+trainer.train([
+    "What is your name?",
+    "My name is YourBetterAssistant.",
+    "That is a nice name.",
+    "Thank You!",
+    "You are welcome."
+    "I am glad to meet you."
+])
+trainer.train([
+    "What is your favorite color?",
+    "My favorite color is Green.",
+    "That is a nice color.",
+    "Thank You!",
+    "You are welcome."
+])
+print("Done Importing")
 while True:
     try:
         bot_input = bot.get_response(input())
@@ -36,3 +59,4 @@ while True:
 
     except (KeyboardInterrupt, EOFError, SystemExit):
         break
+
